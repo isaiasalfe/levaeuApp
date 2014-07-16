@@ -1,5 +1,5 @@
 package models
- 
+
 import play.api.db._
 import play.api.Play.current
  
@@ -33,15 +33,3 @@ object Pessoa {
   }
  
 }
-
-/*
-package models
-
-import play.api.db.slick.Config.driver.simple._
-
-class Pessoa extends Table[(Long, String)]("PESSOA") {
-  def id = column[Long]("ID")
-  def nome = column[String]("NOME")
-  def * = id ~ name
-}
-*/
