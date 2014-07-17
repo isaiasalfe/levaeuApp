@@ -8,7 +8,6 @@ import anorm.SqlParser._
  
 case class Pessoa(id: Pk[Long], nome: String)
 
- 
 object Pessoa {
  
   val simple = {
