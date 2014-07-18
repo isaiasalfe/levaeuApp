@@ -41,6 +41,9 @@ object Application extends Controller {
 	def testeWsRotas = Action {
 		var transportadora: Transportadora = new Transportadora(45, 1)
 		var carrier: Carrier = new Carrier(transportadora)
+		carrier.carrierLocation.coordinates = new Array[Double](2)
+		carrier.carrierLocation.coordinates(0) = 12.44
+		carrier.carrierLocation.coordinates(1) = 23.99
 		
 		WSGeo.getRoutesByCarrier(carrier)
 		var json:String = "{}"
