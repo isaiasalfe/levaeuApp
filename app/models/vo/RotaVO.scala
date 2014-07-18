@@ -13,6 +13,6 @@ class RotaVO {
 	var distancia_sede_km: Double = 0.0
 	
 	@JsonProperty
-	var caminho: GeoJson = new GeoJson("Point")
+	var caminho: GeoJson = new GeoJson("LineString")
 
 }
