@@ -8,6 +8,10 @@ GET 	/                       controllers.Application.index
 GET     /estados                		controllers.Application.estados
 GET     /getRotas/:idTransportadora		controllers.Application.getRotas(idTransportadora: Long)
 
+
+GET		/levaeuapp/api/mobile/transportadora/:idTransportadora/veiculos		controllers.Veiculos.list(idTransportadora: Long)
+
+
 GET     /testeWsRotas           controllers.Application.testeWsRotas
 
 

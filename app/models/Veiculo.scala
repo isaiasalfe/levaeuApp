@@ -19,8 +19,8 @@ object Veiculo {
     }
   }
 
-  def all(): List[Veiculo] = DB.withConnection { implicit c =>
-    SQL("select * from veiculo").as(veiculo *)
+  def findByTransportadora(idTransportadora: Long): List[Veiculo] = DB.withConnection { implicit c =>
+    SQL("select * from veiculo where id_transportadora = " + idTransportadora).as(veiculo *)
   }
 
 
