@@ -41,6 +41,8 @@ object Rotas extends Controller {
 
   def getRotas(idTransportadora: Long) = Action {
   	
+    Logger.info(" --- BUSCANDO ROTAS DA TRANSPORTADORA " + idTransportadora)
+    
     var transportadora = Transportadora.findById(idTransportadora)
     var endereco = Endereco.findById(transportadora.id_endereco)
     var ponto = Ponto.findById(endereco.id_ponto)

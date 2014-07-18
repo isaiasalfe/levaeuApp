@@ -22,6 +22,8 @@ object Veiculos extends Controller {
 
 	def list(idTransportadora: Long) = Action {
   	
+		Logger.info(" --- BUSCANDO VEICULOS DA TRANSPORTADORA " + idTransportadora)
+		
 		val json = Json.generate(Veiculo.findByTransportadora(idTransportadora))
 		Ok(json).as("application/json")
 	}
