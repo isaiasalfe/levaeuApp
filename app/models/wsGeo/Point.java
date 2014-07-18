@@ -9,4 +9,5 @@ public class Point {
 	
 	@JsonProperty
 	public double [] coordinates;
+	
 }

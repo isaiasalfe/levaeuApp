@@ -1,5 +1,6 @@
 package models.wsGeo
 
+import models.vo.GeoJson
 import org.codehaus.jackson.annotate.JsonProperty
 
 class Route {
@@ -8,7 +9,7 @@ class Route {
   var id: Int = 0
   
   @JsonProperty
-  var track = {}
+  var track: GeoJson = new GeoJson("Point")
   
   @JsonProperty
   var paths: Array[Path] = new Array[Path](0)
