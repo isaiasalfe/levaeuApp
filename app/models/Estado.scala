@@ -1,26 +1,24 @@
 package models
 
+import anorm._
+import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-import anorm._
-import anorm.SqlParser._
-
-case class Estado(id: Pk[Long], nome: String)
+case class Estado(id: Long, nome: String)
  
 object Estado {
  
-  val simple = {
-    get[Pk[Long]]("id") ~
+  val estado = {
+    get[Long]("id") ~
     get[String]("nome") map {
       case id~nome => Estado(id, nome)
     }
   }
- 
-  def findAll(): Seq[Estado] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from estado").as(Estado.simple *)
-    }
+
+  def all(): List[Estado] = DB.withConnection { implicit c =>
+    SQL("select * from estado").as(estado *)
   }
+
 
 }
