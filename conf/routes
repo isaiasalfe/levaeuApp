@@ -3,8 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                       controllers.Application.index
-GET     /estados                controllers.Application.estados
+GET 	/                       controllers.Application.index
+
+GET     /estados                		controllers.Application.estados
+GET     /getRotas/:idTransportadora		controllers.Application.getRotas(idTransportadora: Long)
+
 GET     /testeWsRotas           controllers.Application.testeWsRotas
 
 
