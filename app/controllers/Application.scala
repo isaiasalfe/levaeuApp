@@ -20,5 +20,14 @@ object Application extends Controller {
     Ok(json).as("application/json")
 
   }
-  
+
+  def getRotas(idTransportadora: Long) = Action {
+  	
+  	val transportadora = Transportadora.findById(idTransportadora)
+
+    val json = Json.generate(transportadora)
+    Ok(json).as("application/json")
+
+  }
+
 }
