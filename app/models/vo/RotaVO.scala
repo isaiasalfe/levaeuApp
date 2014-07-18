@@ -14,5 +14,10 @@ class RotaVO {
 	
 	@JsonProperty
 	var caminho: GeoJson = new GeoJson("LineString")
+	
+	@JsonProperty
+	var pontos: Array[PontoVO] = new Array[PontoVO](0) 
+	
+	
 
 }
