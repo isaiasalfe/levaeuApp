@@ -19,8 +19,8 @@ CREATE TABLE passageiro (
 
 CREATE TABLE ponto (
 	id 					SERIAL PRIMARY KEY,
-	latitude			NUMBER(12,8),
-	longitude			NUMBER(12,8)
+	latitude			DOUBLE PRECISION,
+	longitude			DOUBLE PRECISION
 );
 
 CREATE TABLE estado (
@@ -57,7 +57,7 @@ CREATE TABLE veiculo (
 	id_transportadora	INT REFERENCES transportadora(id),
 	renavam				VARCHAR(11),
 	placa				VARCHAR(8),
-	capacidade			NUMBER(2)
+	capacidade			INTEGER
 );
 
 
