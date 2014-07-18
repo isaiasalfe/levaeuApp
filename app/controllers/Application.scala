@@ -1,11 +1,10 @@
 package controllers
 
-
 import play.api._
 import play.api.mvc._
 import com.codahale.jerkson.Json
-
 import models._
+import models.RotaVO
 
 object Application extends Controller {
   
@@ -22,10 +21,14 @@ object Application extends Controller {
   }
 
   def getRotas(idTransportadora: Long) = Action {
-  	
-  	val transportadora = Transportadora.findById(idTransportadora)
 
-    val json = Json.generate(transportadora)
+    object rota {
+      var id:Long = 0
+      var pontos:Seq[Int] = Seq(1, 2, 3)
+    }
+    
+  	//val transportadora = Transportadora.findById(idTransportadora)
+    val json = Json.generate(rota)
     Ok(json).as("application/json")
 
   }
