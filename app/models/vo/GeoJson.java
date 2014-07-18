@@ -5,6 +5,10 @@ import java.util.List;
 
 public class GeoJson {
 	
+	public GeoJson() {
+		
+	}
+	
 	public GeoJson(String type){
 		this.type = type;
 	}

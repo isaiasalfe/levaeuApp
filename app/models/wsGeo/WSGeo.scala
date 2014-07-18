@@ -8,6 +8,8 @@ import play.api.Play
 import models.Transportadora
 import com.codahale.jerkson.Json
 import org.codehaus.jackson.map.SerializationConfig
+import java.util.ArrayList
+import play.Logger
 
 object WSGeo {
 	
@@ -21,7 +23,8 @@ object WSGeo {
 		var promise:Promise[Response] = WS.url(url + "/ws/getRoutesByCarrier").post(json)
 		var response = promise.await(timeout, TimeUnit.MILLISECONDS).get
 		
-		response.json.toString
-		new Array[Route](1)
+		var routes:Array[Route] = Json.parse[Array[Route]](response.body)
+		
+		routes
 	}
 }
