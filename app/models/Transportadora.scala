@@ -20,10 +20,10 @@ object Transportadora {
     SQL("select * from transportadora").as(transportadora *)
   }
 
-//  def findById(idTransportadora: Long): Transportadora = DB.withConnection { implicit c =>
-//    SQL("select * from transportadora where id = " + idTransportadora + "limit 1")
-//    .as(transportadora.singleOpt)
-//  }
+  def findById(idTransportadora: Long): Transportadora = DB.withConnection { implicit c =>
+    SQL("select * from transportadora where id = " + idTransportadora + "limit 1")
+    .as(transportadora.single)
+  }
   
   def findBy(key: String, value: String): Option[Transportadora] = DB.withConnection { implicit connection =>
     SQL("select * from transportadora where `$key` = {value} limit 1")

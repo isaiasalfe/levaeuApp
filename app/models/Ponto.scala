@@ -12,7 +12,7 @@ object Ponto {
   val ponto = {
     get[Long]("id") ~
     get[Double]("latitude") ~
-    get[Double]("longtude") map {
+    get[Double]("longitude") map {
       case id~latitude~longitude => Ponto(id, latitude, longitude)
     }
   }
@@ -21,8 +21,8 @@ object Ponto {
     SQL("select * from ponto").as(ponto *)
   }
   
-  def findById(idPonto: Long): List[Ponto] = DB.withConnection { implicit c =>
-    SQL("select * from ponto where id = " + idPonto).as(ponto *)
+  def findById(idPonto: Long): Ponto = DB.withConnection { implicit c =>
+    SQL("select * from ponto where id = " + idPonto).as(ponto.single)
   }
 
 

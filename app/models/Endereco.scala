@@ -25,8 +25,8 @@ object Endereco {
     SQL("select * from endereco").as(endereco *)
   }
   
-  def findById(idEndereco: Long): List[Endereco] = DB.withConnection { implicit c =>
-    SQL("select * from endereco where id = " + idEndereco).as(endereco *)
+  def findById(idEndereco: Long): Endereco = DB.withConnection { implicit c =>
+    SQL("select * from endereco where id = " + idEndereco).as(endereco.single)
   }
 
 
