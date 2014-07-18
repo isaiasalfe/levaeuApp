@@ -20,6 +20,10 @@ object Ponto {
   def all(): List[Ponto] = DB.withConnection { implicit c =>
     SQL("select * from ponto").as(ponto *)
   }
+  
+  def findById(idPonto: Long): List[Ponto] = DB.withConnection { implicit c =>
+    SQL("select * from ponto where id = " + idPonto).as(ponto *)
+  }
 
 
 }

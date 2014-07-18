@@ -1,21 +1,20 @@
 package controllers
 
-
 import play.api._
 import play.api.mvc._
 import com.codahale.jerkson.Json
 import models._
+<<<<<<< HEAD
+import models.RotaVO
+=======
 import play.api.libs.ws.WS
 import play.api.libs.ws.Response
 import scala.collection.immutable.Nil
 import play.api.libs.concurrent.Promise
 import models.wsGeo.WSGeo
 import models.wsGeo.Carrier
-import models.vo.RotaVO
-import models.vo.GeoJson
-import models.vo.RotaVO
-import models.vo.RotaVO
 
+>>>>>>> 1e47aba6514c1681372e24143e9f5680e56c519f
 
 object Application extends Controller {
 
@@ -33,16 +32,14 @@ object Application extends Controller {
   }
 
   def getRotas(idTransportadora: Long) = Action {
-  	
-    var transportadora = Transportadora.findById(idTransportadora)
+
+    object rota {
+      var id:Long = 0
+      var pontos:Seq[Int] = Seq(1, 2, 3)
+    }
     
-    var rotaVO: RotaVO = new RotaVO
-    rotaVO.id = 1
-    rotaVO.distancia_sede_km = 10.2
-    rotaVO.caminho.addCoordinate(1, 2)
-    
-    
-    val json = Json.generate(rotaVO)
+  	//val transportadora = Transportadora.findById(idTransportadora)
+    val json = Json.generate(rota)
     Ok(json).as("application/json")
 
   }
