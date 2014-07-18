@@ -24,7 +24,7 @@ import models.vo.RotaVO
 import models.vo.RotaVO
 
 
-object Application extends Controller {
+object Rotas extends Controller {
 
 	def index = Action {
 		
