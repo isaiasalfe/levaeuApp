@@ -20,6 +20,7 @@ import models.vo.PontoVO
 import models.wsGeo.Path
 import models.vo.RotaVO
 import models.vo.RotaVO
+import models.wsGeo.Route
 
 
 object Rotas extends Controller {
@@ -48,8 +49,15 @@ object Rotas extends Controller {
     Ok(json).as("application/json")
 
   }
-
-	def testeWsRotas = Action {
+  
+  def consolidar() = Action {
+    
+    var routes: Array[Route] = Rota.consolidar
+    val json = Json.generate(routes)
+    Ok(json).as("application/json")
+  }
+  
+  def testeWsRotas = Action {
 		var transportadora: Transportadora = new Transportadora(45, 1)
 		var carrier: Carrier = new Carrier(transportadora)
 		carrier.carrierLocation.coordinates = new Array[Double](2)

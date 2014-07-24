@@ -27,4 +27,14 @@ object WSGeo {
 		
 		routes
 	}
+	
+	def getAllRoutes(): Array[Route] = {
+		
+		var promise:Promise[Response] = WS.url(url + "/ws/getAllRoutes").get()
+		var response = promise.await(timeout, TimeUnit.MILLISECONDS).get
+
+		var routes:Array[Route] = Json.parse[Array[Route]](response.body)
+		
+		routes
+	}
 }

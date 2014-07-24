@@ -8,6 +8,7 @@ import models.vo.RotaVO
 import models.wsGeo.Carrier
 import models.wsGeo.Route
 import models.wsGeo.WSGeo
+import models.wsGeo.Route
 
 case class Rota(id: Long, id_veiculo: Long, candidata: Boolean)
  
@@ -31,6 +32,11 @@ object Rota {
 	  var routes: Array[Route] = WSGeo.getRoutesByCarrier(carrier)
 	  var rotas: Array[RotaVO] = new RotasParser().parse(routes)
 	  rotas
+  }
+  
+  def consolidar():Array[Route] = {
+    
+	  WSGeo.getAllRoutes
   }
 
 
