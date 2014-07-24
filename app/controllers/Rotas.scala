@@ -58,8 +58,9 @@ object Rotas extends Controller {
 
   def consolidar() = Action {
     
-    var routesIds: Array[Int] = Rota.consolidar
-    val json = Json.generate(routesIds)
+	var mensagem:Mensagem = Rota.consolidar
+	var json:String = Json.generate(mensagem)
+	
     Ok(json).as("application/json")
   }
 	

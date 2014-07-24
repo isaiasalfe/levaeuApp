@@ -11,6 +11,7 @@ import models.wsGeo.WSGeo
 import models.wsGeo.Route
 import java.util.ArrayList
 import play.Logger
+import java.util.Arrays
 
 case class Rota(id: Long, id_veiculo: Long, candidata: Boolean){
   
@@ -43,7 +44,7 @@ object Rota {
 	    
 	    var rota = new Rota(idRota, idVeiculo, true)
 	    Rota.save(rota)
-	    mensagem = new Mensagem("Rota vinculada com sucesso!", "SUCESS")
+	    mensagem = new Mensagem("Rota vinculada com sucesso!", "SUCCESS")
 	    
 	  }
 	  
@@ -87,19 +88,28 @@ object Rota {
 	    }
 	    
 	    if(!encontrou){
-	      Logger.info("Encontrou o ID: " + routes(i).id)
 	      rotasDisponiveis::= routes(i)
 	    }
 	    
 	  }
-	  Logger.info("Quantidade de rotas disponíveis: " + rotasDisponiveis.length)
+	  
 	  rotasDisponiveis
   }
   
-  def consolidar():Array[Int] = {
+  def consolidar():Mensagem = {
     
 	  var routes:Array[Route] = WSGeo.getAllRoutes
-	  Route.listIds(routes)
+	  var rotasObsoletas:List[Rota] = findNotIn( Route.listIds(routes) )
+	  
+	  if (rotasObsoletas != null && rotasObsoletas.length > 0) {
+    
+		  for(i <- 0 to rotasObsoletas.length -1) {
+			  delete(rotasObsoletas(i))
+		  }
+	  }
+	  
+	  updateRotasCandidatas(false)
+	  new Mensagem("Rotas consolidadas com sucesso.", "SUCCESS")
   }
 
   def all(): List[Rota] = DB.withConnection { implicit c =>
@@ -121,6 +131,28 @@ object Rota {
           'candidata -> rota.candidata
       ).executeUpdate
     }
+  }
+  
+  def findNotIn(ids: Array[Long]): List[Rota] = DB.withConnection { implicit c =>
+  	
+    if (ids == null || ids.length == 0)
+    	return List()  
+    
+    SQL("select * from rota where id not in (" + List.fromArray(ids).mkString(",") + ")").as(rota *)
+  }
+  
+  def delete(rota: Rota) = {
+    
+	DB.withConnection { implicit connection =>
+		SQL(""" delete from Rota where id = {id_rota} """).on('id_rota -> rota.id).executeUpdate
+	}
+  }
+
+  def updateRotasCandidatas(candidatas: Boolean) = {
+    
+	DB.withConnection { implicit connection =>
+		SQL(""" update Rota set candidata = {candidata} """).on('candidata -> candidatas).executeUpdate
+	}
   }
 
 
