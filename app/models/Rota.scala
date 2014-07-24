@@ -10,6 +10,7 @@ import models.wsGeo.Route
 import models.wsGeo.WSGeo
 import models.wsGeo.Route
 import java.util.ArrayList
+import play.Logger
 
 case class Rota(id: Long, id_veiculo: Long, candidata: Boolean){
   
@@ -86,11 +87,12 @@ object Rota {
 	    }
 	    
 	    if(!encontrou){
-	      rotasDisponiveis.+:(routes(i))
+	      Logger.info("Encontrou o ID: " + routes(i).id)
+	      rotasDisponiveis::= routes(i)
 	    }
 	    
 	  }
-	  
+	  Logger.info("Quantidade de rotas disponíveis: " + rotasDisponiveis.length)
 	  rotasDisponiveis
   }
   
