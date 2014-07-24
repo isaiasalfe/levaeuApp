@@ -48,7 +48,7 @@ object Rotas extends Controller {
 
   }
   
-  def getRotas = Action {
+  def getRotasProcesso = Action {
 
 	  var rotas: Array[RotaVO] = Rota.getRotasDisponiveis()
 	  
