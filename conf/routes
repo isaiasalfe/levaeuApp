@@ -9,6 +9,7 @@ GET		/api/mobile/rota/:idRota/veiculo/:idVeiculo/euQuero					controllers.Rotas.e
 
 GET     /api/processo/rotas													controllers.Rotas.getRotasProcesso()
 GET     /api/processo/rotas/consolidar										controllers.Rotas.consolidar()
+GET		/api/processo/rotas/candidatas/excluir								controllers.Rotas.excluirCandidatas()
 
 #GET	 /                       controllers.Application.index
 #GET     /estados                controllers.Application.estados

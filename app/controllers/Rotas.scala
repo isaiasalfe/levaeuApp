@@ -63,6 +63,14 @@ object Rotas extends Controller {
 	
     Ok(json).as("application/json")
   }
+  
+  def excluirCandidatas = Action {
+
+	  var mensagem:Mensagem = Rota.excluirCandidatas
+	  var json:String = Json.generate(mensagem)
+	  
+	  Ok(json).as("application/json")
+  }
 	
 	def euQuero(idRota: Long, idVeiculo:Long) = Action {
 

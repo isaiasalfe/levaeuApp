@@ -96,6 +96,12 @@ object Rota {
 	  rotasDisponiveis
   }
   
+  def excluirCandidatas():Mensagem = {
+    
+    deleteCandidatas()
+	new Mensagem("Rotas candidatas exluidas com sucesso.", "SUCCESS")
+  }
+  
   def consolidar():Mensagem = {
     
 	  var routes:Array[Route] = WSGeo.getAllRoutes
@@ -155,5 +161,12 @@ object Rota {
 	}
   }
 
+  private def deleteCandidatas() {
+    
+    DB.withConnection { implicit connection =>
+      
+		SQL(""" delete from Rota where candidata = true """).executeUpdate
+	}
+  }
 
 }
