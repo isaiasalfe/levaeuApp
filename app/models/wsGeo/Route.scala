@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty
 class Route {
 
   @JsonProperty
-  var id: Int = 0
+  var id: Long = 0
   
   @JsonProperty
   var track: GeoJson = new GeoJson("Point")
@@ -18,9 +18,9 @@ class Route {
 
 object Route {
   
-  def listIds(routes: Array[Route]):Array[Int] = {
+  def listIds(routes: Array[Route]):Array[Long] = {
     
-    var ids: Array[Int] = new Array(routes.length)
+    var ids: Array[Long] = new Array(routes.length)
     
     for(i <- 0 to routes.length -1) {
       
