@@ -13,4 +13,21 @@ class Route {
   
   @JsonProperty
   var paths: Array[Path] = new Array[Path](0)
+  
 }
+
+object Route {
+  
+  def listIds(routes: Array[Route]):Array[Int] = {
+    
+    var ids: Array[Int] = new Array(routes.length)
+    
+    for(i <- 0 to routes.length -1) {
+      
+      ids(i) = routes(i).id
+    }
+    
+    ids
+  }
+}
+

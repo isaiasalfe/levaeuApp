@@ -94,9 +94,10 @@ object Rota {
 	  rotasDisponiveis
   }
   
-  def consolidar():Array[Route] = {
+  def consolidar():Array[Int] = {
     
-	  WSGeo.getAllRoutes
+	  var routes:Array[Route] = WSGeo.getAllRoutes
+	  Route.listIds(routes)
   }
 
   def all(): List[Rota] = DB.withConnection { implicit c =>
