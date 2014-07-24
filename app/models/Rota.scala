@@ -88,7 +88,7 @@ object Rota {
 	    }
 	    
 	    if(!encontrou){
-	      rotasDisponiveis.+:(routes(i))
+	      rotasDisponiveis::= routes(i)
 	    }
 	    
 	  }

@@ -49,4 +49,14 @@ object WSGeo {
 		
 		routes
 	}
+	
+	def recalculateRoutes(): Array[String] = {
+		
+		var promise:Promise[Response] = WS.url(url + "/ws/recalculateRoutes").get()
+		var response = promise.await(timeout, TimeUnit.MILLISECONDS).get
+
+		var messages:Array[String] = Json.parse[Array[String]](response.body)
+		
+		messages
+	}
 }

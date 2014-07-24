@@ -52,7 +52,7 @@ object Rotas extends Controller {
 
 	  var rotas: Array[RotaVO] = Rota.getRotasDisponiveis()
 	  
-	  var json:String = Json.generate("")
+	  var json:String = Json.generate(rotas)
 	  Ok(json).as("application/json")
 	}
 
@@ -76,6 +76,15 @@ object Rotas extends Controller {
 
 	  var mensagem = Rota.euQuero(idRota, idVeiculo)
 
+	  val json = Json.generate(mensagem)
+	  Ok(json).as("application/json")
+	}
+	
+	def recalculaRotas() = Action {
+	  
+	  var messages = WSGeo.recalculateRoutes
+	  var mensagem:Mensagem = new Mensagem(messages(0), "SUCCESS")
+	  
 	  val json = Json.generate(mensagem)
 	  Ok(json).as("application/json")
 	}
