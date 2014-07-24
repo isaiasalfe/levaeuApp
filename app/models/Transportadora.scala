@@ -5,7 +5,14 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Transportadora(id: Long, id_endereco: Long)
+case class Transportadora(id: Long, id_endereco: Long) {
+
+  def getPontoSede(): Ponto = {
+    
+    var endereco = Endereco.findById(id)
+    return Ponto.findById(endereco.id_ponto)
+  }
+}
  
 object Transportadora {
  
@@ -15,7 +22,7 @@ object Transportadora {
       case id~id_endereco => Transportadora(id, id_endereco)
     }
   }
-
+  
   def all(): List[Transportadora] = DB.withConnection { implicit c =>
     SQL("select * from transportadora").as(transportadora *)
   }
