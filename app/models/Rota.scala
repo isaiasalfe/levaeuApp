@@ -34,9 +34,10 @@ object Rota {
 	  rotas
   }
   
-  def consolidar():Array[Route] = {
+  def consolidar():Array[Int] = {
     
-	  WSGeo.getAllRoutes
+	  var routes:Array[Route] = WSGeo.getAllRoutes
+	  Route.listIds(routes)
   }
 
 
