@@ -20,9 +20,21 @@ object WSGeo {
 
 		var json: String = Json.generate(carrier)
 		
-		var promise:Promise[Response] = WS.url(url + "/ws/getRoutesByCarrier").post(json)
+		var promise:Promise[Response] = WS.url(url + "/levaeuGeoWS/ws/getRoutesByCarrier")
+		.withHeaders("Content-Type" -> "application/json")
+		.post(json) //"application/json"
+		
+		Logger.info(">>>>>>>>>>>>>Consumindo BDGeo - URL: ")
+		Logger.info(url + "/levaeuGeoWS/ws/getRoutesByCarrier")
+		
 		var response = promise.await(timeout, TimeUnit.MILLISECONDS).get
 		
+		Logger.info("")
+		Logger.info("")
+		Logger.info(">>>>>>>>>>>>>Resposta: ")
+		Logger.info(response.body.toString())
+		Logger.info("")
+		Logger.info("")
 		var routes:Array[Route] = Json.parse[Array[Route]](response.body)
 		
 		routes

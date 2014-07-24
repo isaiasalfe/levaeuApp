@@ -17,27 +17,20 @@ import models.vo.GeoJson
 import models.vo.RotaVO
 import models.wsGeo.Route
 import models.vo.PontoVO
-import models.vo.PontoVO
 import models.wsGeo.Path
 import models.vo.PontoVO
-import models.vo.RotaVO
-import models.vo.RotaVO
 
 
 object Rotas extends Controller {
 
 	def index = Action {
-		
 		Ok(views.html.index("Your new application is ready."))
-		
 	}
 
 	def estados = Action {
-  	
-    val json = Json.generate(Estado.all())
-    Ok(json).as("application/json")
-
-  }
+		val json = Json.generate(Estado.all())
+		Ok(json).as("application/json")
+	}
 
   def getRotas(idTransportadora: Long) = Action {
   	
@@ -94,5 +87,35 @@ object Rotas extends Controller {
 		var json:String = Json.generate(routes)
 		
 		Ok(json).as("application/json")
+	}
+	
+	def euQuero(idRota: Long, idVeiculo:Long) = Action {
+
+	  var mensagem = Rota.euQuero(idRota, idVeiculo)
+
+	  val json = Json.generate(mensagem)
+	  Ok(json).as("application/json")
+	}
+	
+	def getRotasProcesso = Action {
+
+	  //o mesmo que o getRotas so que sem o idTransportadora
+	  
+	  var rotasGeo: Array[RotaVO] = new Array[RotaVO](10)
+	  var rotas: Array[RotaVO] = new Array[RotaVO](10)
+	  
+	  
+	  for(i <- 0 to rotasGeo.length -1) {
+	    
+	    for(j <- 0 to rotas.length -1) {
+	      
+	      //if(rotasGeo(i).id == rotas.id)
+	      
+	    }
+	    
+	  }
+	  
+	  var json:String = Json.generate("")
+	  Ok(json).as("application/json")
 	}
 }

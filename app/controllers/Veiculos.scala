@@ -16,6 +16,7 @@ import models.vo.RotaVO
 import models.vo.GeoJson
 import models.vo.RotaVO
 import models.wsGeo.Route
+import com.google.gson.Gson
 
 
 object Veiculos extends Controller {
@@ -27,4 +28,5 @@ object Veiculos extends Controller {
 		val json = Json.generate(Veiculo.findByTransportadora(idTransportadora))
 		Ok(json).as("application/json")
 	}
+
 }
