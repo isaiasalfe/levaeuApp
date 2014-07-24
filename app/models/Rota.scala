@@ -4,6 +4,11 @@ import anorm._
 import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
+import models.vo.RotaVO
+import models.wsGeo.Carrier
+import models.wsGeo.Route
+import models.wsGeo.WSGeo
+import models.wsGeo.Route
 
 case class Rota(id: Long, id_veiculo: Long, candidata: Boolean){
   
@@ -41,6 +46,19 @@ object Rota {
 	  }
 	  
 	  mensagem
+  }
+
+  def getRotasDisponiveis(transportadora: Transportadora):Array[RotaVO] = {
+    
+	  var carrier: Carrier = new Carrier(transportadora)
+	  var routes: Array[Route] = WSGeo.getRoutesByCarrier(carrier)
+	  var rotas: Array[RotaVO] = new RotasParser().parse(routes)
+	  rotas
+  }
+  
+  def consolidar():Array[Route] = {
+    
+	  WSGeo.getAllRoutes
   }
 
   def all(): List[Rota] = DB.withConnection { implicit c =>

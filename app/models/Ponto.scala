@@ -5,7 +5,16 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Ponto(id: Long, latitude: Double, longitude: Double)
+case class Ponto(id: Long, latitude: Double, longitude: Double) {
+  
+  def getCoordenadas(): Array[Double] = {
+    
+    var coordenadas:Array[Double] = new Array[Double](2)
+    coordenadas(0) = latitude
+    coordenadas(1) = longitude
+    coordenadas
+  }
+}
  
 object Ponto {
  
