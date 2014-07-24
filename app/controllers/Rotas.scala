@@ -12,13 +12,11 @@ import play.api.libs.concurrent.Promise
 import models.wsGeo.WSGeo
 import models.wsGeo.Carrier
 import models.wsGeo.Point
-import models.vo.RotaVO
 import models.vo.GeoJson
 import models.vo.RotaVO
 import models.wsGeo.Route
 import models.vo.PontoVO
 import models.wsGeo.Path
-import models.vo.RotaVO
 import models.vo.RotaVO
 import models.wsGeo.Route
 
@@ -50,22 +48,29 @@ object Rotas extends Controller {
 
   }
   
+  def getRotasProcesso = Action {
+
+	  var rotas: Array[RotaVO] = Rota.getRotasDisponiveis()
+	  
+	  var json:String = Json.generate("")
+	  Ok(json).as("application/json")
+	}
+
   def consolidar() = Action {
     
-	Rota.consolidar
-    Ok("[{}]").as("application/json")
+	var mensagem:Mensagem = Rota.consolidar
+	var json:String = Json.generate(mensagem)
+	
+    Ok(json).as("application/json")
   }
-  
-  def testeWsRotas = Action {
-		var transportadora: Transportadora = new Transportadora(45, 1)
-		var carrier: Carrier = new Carrier(transportadora)
-		carrier.carrierLocation.coordinates = new Array[Double](2)
-		carrier.carrierLocation.coordinates(0) = 12.44
-		carrier.carrierLocation.coordinates(1) = 23.99
-		
-		var routes:Array[Route] = WSGeo.getRoutesByCarrier(carrier)
-		var json:String = Json.generate(routes)
-		
-		Ok(json).as("application/json")
+	
+	def euQuero(idRota: Long, idVeiculo:Long) = Action {
+
+	  var mensagem = Rota.euQuero(idRota, idVeiculo)
+
+	  val json = Json.generate(mensagem)
+	  Ok(json).as("application/json")
 	}
+	
+
 }
