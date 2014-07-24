@@ -9,6 +9,7 @@ import models.wsGeo.Carrier
 import models.wsGeo.Route
 import models.wsGeo.WSGeo
 import models.wsGeo.Route
+import java.util.ArrayList
 
 case class Rota(id: Long, id_veiculo: Long, candidata: Boolean){
   
@@ -48,12 +49,49 @@ object Rota {
 	  mensagem
   }
 
+   def getRotasDisponiveis():Array[RotaVO] = {
+    
+	  var routes: Array[Route] = WSGeo.getAllRoutes()
+	  
+	  var rotasDisponiveis = removerRotasCadastradas(routes)
+	  
+	  var rotasParser: Array[RotaVO] = new RotasParser().parse(rotasDisponiveis.toArray)
+	  rotasParser
+  }
+    
   def getRotasDisponiveis(transportadora: Transportadora):Array[RotaVO] = {
     
 	  var carrier: Carrier = new Carrier(transportadora)
 	  var routes: Array[Route] = WSGeo.getRoutesByCarrier(carrier)
-	  var rotas: Array[RotaVO] = new RotasParser().parse(routes)
-	  rotas
+	  
+	  var rotasDisponiveis = removerRotasCadastradas(routes)
+	  
+	  var rotasParser: Array[RotaVO] = new RotasParser().parse(rotasDisponiveis.toArray)
+	  rotasParser
+  }
+  
+  def removerRotasCadastradas(routes: Array[Route]):List[Route] = {
+    
+	  var rotasDisponiveis = List[Route]() 
+	  
+	  var rotas: List[Rota] = Rota.all()
+	  
+	  for(i <- 0 to routes.length -1) {
+	    
+	    var encontrou:Boolean = false
+	    
+	    for(j <- 0 to rotas.length -1) {
+	      if(routes(i).id == rotas(j).id)
+	        encontrou = true;
+	    }
+	    
+	    if(!encontrou){
+	      rotasDisponiveis.+:(routes(i))
+	    }
+	    
+	  }
+	  
+	  rotasDisponiveis
   }
   
   def consolidar():Array[Route] = {

@@ -7,6 +7,7 @@ GET     /api/mobile/transportadora/:idTransportadora/rotasDisponiveis		controlle
 GET		/api/mobile/transportadora/:idTransportadora/veiculos				controllers.Veiculos.list(idTransportadora: Long)
 GET		/api/mobile/rota/:idRota/veiculo/:idVeiculo/euQuero					controllers.Rotas.euQuero(idRota: Long, idVeiculo:Long)
 
+GET     /api/processo/rotas													controllers.Rotas.getRotas()
 GET     /api/processo/rotas/consolidar										controllers.Rotas.consolidar()
 
 #GET	 /                       controllers.Application.index

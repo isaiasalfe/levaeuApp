@@ -47,6 +47,14 @@ object Rotas extends Controller {
     Ok(json).as("application/json")
 
   }
+  
+  def getRotas = Action {
+
+	  var rotas: Array[RotaVO] = Rota.getRotasDisponiveis()
+	  
+	  var json:String = Json.generate("")
+	  Ok(json).as("application/json")
+	}
 
   def consolidar() = Action {
     
@@ -54,19 +62,6 @@ object Rotas extends Controller {
     val json = Json.generate(routes)
     Ok(json).as("application/json")
   }
-
-	def testeWsRotas = Action {
-		var transportadora: Transportadora = new Transportadora(45, 1)
-		var carrier: Carrier = new Carrier(transportadora)
-		carrier.carrierLocation.coordinates = new Array[Double](2)
-		carrier.carrierLocation.coordinates(0) = 12.44
-		carrier.carrierLocation.coordinates(1) = 23.99
-		
-		var routes:Array[Route] = WSGeo.getRoutesByCarrier(carrier)
-		var json:String = Json.generate(routes)
-		
-		Ok(json).as("application/json")
-	}
 	
 	def euQuero(idRota: Long, idVeiculo:Long) = Action {
 
@@ -76,25 +71,5 @@ object Rotas extends Controller {
 	  Ok(json).as("application/json")
 	}
 	
-	def getRotasProcesso = Action {
 
-	  //o mesmo que o getRotas so que sem o idTransportadora
-	  
-	  var rotasGeo: Array[RotaVO] = new Array[RotaVO](10)
-	  var rotas: Array[RotaVO] = new Array[RotaVO](10)
-	  
-	  
-	  for(i <- 0 to rotasGeo.length -1) {
-	    
-	    for(j <- 0 to rotas.length -1) {
-	      
-	      //if(rotasGeo(i).id == rotas.id)
-	      
-	    }
-	    
-	  }
-	  
-	  var json:String = Json.generate("")
-	  Ok(json).as("application/json")
-	}
 }
