@@ -3,6 +3,7 @@ package models.vo
 import org.codehaus.jackson.annotate.JsonProperty
 import models.wsGeo.Path
 import models.wsGeo.Point
+import models.Ponto
 
 class PontoVO {
   
@@ -17,5 +18,11 @@ class PontoVO {
 	  this()
 	  x = point.coordinates(0)
 	  y = point.coordinates(1)
+	}
+  	
+  	def this(ponto: Ponto) = {
+  	  this()
+	  x = ponto.latitude
+	  y = ponto.longitude
 	}
 }

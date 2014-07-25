@@ -5,7 +5,10 @@
 
 GET     /api/mobile/transportadora/:idTransportadora/rotasDisponiveis		controllers.Rotas.getRotas(idTransportadora: Long)
 GET		/api/mobile/transportadora/:idTransportadora/veiculos				controllers.Veiculos.list(idTransportadora: Long)
+GET		/api/mobile/transportadora/:idTransportadora/sede					controllers.Transportadoras.findSede(idTransportadora: Long)
+
 GET		/api/mobile/veiculo/:idVeiculo/rota/:idRota/euQuero					controllers.Rotas.euQuero(idRota: Long, idVeiculo:Long)
+
 
 GET     /api/processo/rotas													controllers.Rotas.getRotasProcesso()
 GET     /api/processo/rotas/consolidar										controllers.Rotas.consolidar()
